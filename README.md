@@ -70,3 +70,5 @@ v0.01 Boiler plate. I've created the project with Vite. Cleaned all example code
 v0.02 ProductSelection component. Gave a state and some logic between controls to make it a bit functional. 
 
 v0.03 Added a Context for storing the cart.
+
+v0.04 Cart component and Context. Added dynamic list and its functionallity for Adding an item, Removing an item and Removing all items.

@@ -3,8 +3,12 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import Table from 'react-bootstrap/Table'
+import { useCart } from '../hooks/useCart'
+
 
 export default function Cart() {
+   const { cartItems, MAX_NUM_PRODUCTS, clearCart, removeFromCart } = useCart()
+
    return (
       <>
       <Container className="border border-2 border-dark p-4">
@@ -23,30 +27,26 @@ export default function Cart() {
                </tr>
                </thead>
                <tbody>
-               <tr>
-                  <td>TV</td>
-                  <td>2</td>
-                  <td>1,99</td>
-                  <td>19</td>
-                  <td>3,98</td>
-                  <td>3,98</td>
-                  <td><Button variant="danger">X</Button></td>
-               </tr>
-               <tr>
-                  <td>TV</td>
-                  <td>2</td>
-                  <td>1,99</td>
-                  <td>19</td>
-                  <td>3,98</td>
-                  <td>3,98</td>
-                  <td><Button variant="danger">X</Button></td>
-               </tr>
+               {cartItems.map((item, idx: number) => (
+                  <tr key={idx} >
+                     <td>{item.prod.productName}</td>
+                     <td>{item.amount}</td>
+                     <td>{item.prod.price}</td>
+                     <td>{item.prod.taxRate}</td>
+                     <td>{item.prod.price*(100+item.prod.taxRate)/100}</td>
+                     <td>{item.prod.price*(100+item.prod.taxRate)/100*item.amount}</td>
+                     <td><Button variant="danger" onClick={() => removeFromCart(item.prod.id)}>X</Button></td>
+                  </tr>                  
+               ))}              
+
+
+               
                </tbody>
                <tfoot>
-               <tr>
+                <tr>
                   <td className="p-3 text-end fw-bold" colSpan={4}>Total:</td>
-                  <td className="p-3 text-primary fw-bold" >19,98</td>
-                  <td className="p-3 text-primary fw-bold" >19,98</td>
+                  <td className="p-3 text-primary fw-bold" >0</td>
+                  <td className="p-3 text-primary fw-bold" >0</td>
                   <td ></td>
                </tr>
                </tfoot>
@@ -57,13 +57,13 @@ export default function Cart() {
 
             <Row className="w-full align-items-center justify-content-between g-3">
             <Col>
-               <Button variant="danger">Clear Cart</Button>
+               <Button variant="danger" onClick={clearCart}>Clear Cart</Button>
             </Col>        
 
             <Col>
             <div className="text-center">
-               <p>Number of products 3/10<i className="bi bi-6-square-fill"></i></p>
-               <progress id="numproducts" value="2" max="10"> 3 </progress>
+               <p>Number of products {cartItems.length}/{MAX_NUM_PRODUCTS}<i className="bi bi-6-square-fill"></i></p>
+               <progress id="numproducts" value={cartItems.length} max={MAX_NUM_PRODUCTS}> {cartItems.length} </progress>
 
             </div>
             </Col>

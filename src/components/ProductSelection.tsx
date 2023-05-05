@@ -8,6 +8,7 @@ import { productProps } from '../interfaces/interfaces'
 import { useCart } from '../hooks/useCart'
 
 
+
 export default function ProductSelection() {
    const { addToCart } = useCart()
 
