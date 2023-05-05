@@ -62,7 +62,9 @@ _Hint: You will find the products in the data folder_
 
 ### Good luck
 
-Changelog:
+## Changelog:
 v0.01 Boiler plate. I've created the project with Vite. Cleaned all example code. 
    Added Bootstrap for not wasting too much time styling in this task (it's not the purpose of this challenge).
    Created 2 Components (Cart & ProductSelection) non functional but good visually as a mockup.
+
+v0.02 ProductSelection component. Gave a state and some logic between controls to make it a bit functional. 
