@@ -68,3 +68,5 @@ v0.01 Boiler plate. I've created the project with Vite. Cleaned all example code
    Created 2 Components (Cart & ProductSelection) non functional but good visually as a mockup.
 
 v0.02 ProductSelection component. Gave a state and some logic between controls to make it a bit functional. 
+
+v0.03 Added a Context for storing the cart.

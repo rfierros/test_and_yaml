@@ -4,16 +4,12 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import productsList from '../data/products.json'
+import { productProps } from '../interfaces/interfaces'
+import { useCart } from '../hooks/useCart'
 
-type productProps = {
-   id: string
-   productName: string
-   maxAmount: number
-   taxRate: number
-   price: number
-}
 
 export default function ProductSelection() {
+   const { addToCart } = useCart()
 
    const [amount, setAmount] = useState(0)
    const [selected, setSelected] = useState({
@@ -39,13 +35,15 @@ export default function ProductSelection() {
       if ( amount == 0){
          alert('Amount must be greater than 0')
       } else {
-      console.log(selected)
-      console.log(amount)
+         addToCart(selected,amount)
+         console.log(selected)
+         console.log(amount)
       }
    }
 
    return (
       <>
+
       <Container className="border border-2 border-dark p-4 align-items-center justify-content-center">
          <h4>Product Selection</h4>
          <Row className="w-full align-items-center justify-content-between g-3">
