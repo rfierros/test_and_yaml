@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/Button'
 import productsList from '../data/products.json'
 import { productProps } from '../interfaces/interfaces'
 import { useCart } from '../hooks/useCart'
+import { formatCurrency } from '../utils/formatCurrency'
 
 
 
@@ -69,9 +70,9 @@ export default function ProductSelection() {
          <div className="p-2">
             <span className="p-2">{amount}</span>
             <span className="p-2">X</span>
-            <span className="p-2">{selected.price}</span>
+            <span className="p-2">{formatCurrency(selected.price)}</span>
             <span className="p-2">=</span>
-            <span className="p-2">{selected.price*amount}</span>
+            <span className="p-2">{formatCurrency(selected.price*amount)}</span>
          </div>
          </Col>
 

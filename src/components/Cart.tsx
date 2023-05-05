@@ -4,6 +4,7 @@ import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import Table from 'react-bootstrap/Table'
 import { useCart } from '../hooks/useCart'
+import { formatCurrency } from '../utils/formatCurrency'
 
 
 export default function Cart() {
@@ -21,7 +22,7 @@ export default function Cart() {
                   <th>Amount</th>
                   <th>Unit Price</th>
                   <th>Tax</th>
-                  <th>Price</th>
+                  <th>Price (no Tax)</th>
                   <th>Price (incl.Tax)</th>
                   <th>Remove</th>
                </tr>
@@ -31,10 +32,10 @@ export default function Cart() {
                   <tr key={idx} >
                      <td>{item.prod.productName}</td>
                      <td>{item.amount}</td>
-                     <td>{item.prod.price}</td>
-                     <td>{item.prod.taxRate}</td>
-                     <td>{item.prod.price*(100+item.prod.taxRate)/100}</td>
-                     <td>{item.prod.price*(100+item.prod.taxRate)/100*item.amount}</td>
+                     <td>{formatCurrency(item.prod.price)}</td>
+                     <td>{item.prod.taxRate}%</td>
+                     <td>{formatCurrency(item.prod.price*item.amount)}</td>
+                     <td>{formatCurrency(item.prod.price*(100+item.prod.taxRate)/100*item.amount)}</td>
                      <td><Button variant="danger" onClick={() => removeFromCart(item.prod.id)}>X</Button></td>
                   </tr>                  
                ))}              
