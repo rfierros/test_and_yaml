@@ -31,19 +31,25 @@ export function CartProvider ({children}: CartProviderProps) {
    }
 
    function addToCart(prod: productProps, amount: number) {
-      setCartItems(currentItems => {
-         if (currentItems.find(item => item.prod.id === prod.id) == null) { //if it doesn't exist we add it
-            return [...currentItems, {prod, amount}]
-         } else {
-            return  currentItems.map(item => {
-               if (item.prod.id === prod.id){
-                  return {...item, amount: amount} // we update the amount for this already selected product
-               } else {
-                  return item 
-               }
-            })
-         }
-      })
+      if (cartItems.length >= MAX_NUM_PRODUCTS) {
+         alert('Maximum number of products reached.')
+
+      } else {
+         setCartItems(currentItems => {
+            if (currentItems.find(item => item.prod.id === prod.id) == null) { //if it doesn't exist we add it
+               return [...currentItems, {prod, amount}]
+            } else {
+               return  currentItems.map(item => {
+                  if (item.prod.id === prod.id){
+                     return {...item, amount: amount} // we update the amount for this already selected product
+                  } else {
+                     return item 
+                  }
+               })
+            }
+         })
+      }
+
    }   
 
    function removeFromCart(id: string) {

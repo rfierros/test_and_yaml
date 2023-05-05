@@ -72,3 +72,7 @@ v0.02 ProductSelection component. Gave a state and some logic between controls t
 v0.03 Added a Context for storing the cart.
 
 v0.04 Cart component and Context. Added dynamic list and its functionality for Adding an item, Removing an item and Removing all items.
+
+v0.05 Added a format currency funcionality.
+
+v0.06 Included calculations for totals and small validations.

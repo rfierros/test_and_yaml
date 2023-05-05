@@ -38,8 +38,6 @@ export default function ProductSelection() {
          alert('Amount must be greater than 0')
       } else {
          addToCart(selected,amount)
-         console.log(selected)
-         console.log(amount)
       }
    }
 
@@ -79,8 +77,6 @@ export default function ProductSelection() {
          <Col>
             <Button onClick={handleAddProduct}>add to Cart</Button>
          </Col>
-
-      
          </Row>
 
       </Container>

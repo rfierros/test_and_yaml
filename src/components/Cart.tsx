@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -9,7 +10,6 @@ import { formatCurrency } from '../utils/formatCurrency'
 
 export default function Cart() {
    const { cartItems, MAX_NUM_PRODUCTS, clearCart, removeFromCart } = useCart()
-
    return (
       <>
       <Container className="border border-2 border-dark p-4">
@@ -46,8 +46,16 @@ export default function Cart() {
                <tfoot>
                 <tr>
                   <td className="p-3 text-end fw-bold" colSpan={4}>Total:</td>
-                  <td className="p-3 text-primary fw-bold" >0</td>
-                  <td className="p-3 text-primary fw-bold" >0</td>
+                  <td className="p-3 text-primary fw-bold" >
+                     {formatCurrency(cartItems.reduce((total, cartItem) => {
+                                       return total + (cartItem.prod.price) * cartItem.amount
+                                     }, 0))}
+                  </td>
+                  <td className="p-3 text-primary fw-bold" >
+                     {formatCurrency(cartItems.reduce((total, cartItem) => {
+                                       return total + (cartItem.prod.price) * ((100+cartItem.prod.taxRate)/100) * cartItem.amount
+                                     }, 0))}
+                  </td>
                   <td ></td>
                </tr>
                </tfoot>
