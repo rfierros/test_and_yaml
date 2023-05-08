@@ -76,3 +76,5 @@ v0.04 Cart component and Context. Added dynamic list and its functionality for A
 v0.05 Added a format currency funcionality.
 
 v0.06 Included calculations for totals and small validations.
+
+v0.07 Added Modal Checkout and Modal Errors.

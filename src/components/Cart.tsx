@@ -6,15 +6,18 @@ import Button from 'react-bootstrap/Button'
 import Table from 'react-bootstrap/Table'
 import { useCart } from '../hooks/useCart'
 import { formatCurrency } from '../utils/formatCurrency'
+import ModalCheckout from './ModalCheckout'
 
 
 export default function Cart() {
    const { cartItems, MAX_NUM_PRODUCTS, clearCart, removeFromCart } = useCart()
+   const [modalShow, setModalShow] = useState(false)
    return (
       <>
       <Container className="border border-2 border-dark p-4">
          <h4>Cart</h4>
          <Container>
+            {(cartItems.length > 0) && 
             <Table striped bordered hover>
                <thead>
                <tr>
@@ -60,6 +63,7 @@ export default function Cart() {
                </tr>
                </tfoot>
             </Table>
+            }
          </Container>
 
          <Container className="pt-4">
@@ -79,7 +83,7 @@ export default function Cart() {
 
 
             <Col>
-               <Button variant="success">Buy!</Button>
+               <Button variant="success" onClick={() => setModalShow(true)}>Buy!</Button>
             </Col>
 
          
@@ -87,6 +91,10 @@ export default function Cart() {
 
          </Container>
       </Container>
+    <ModalCheckout
+      show={modalShow}
+      onHide={() => setModalShow(false)}
+    />      
       </>
    )
 }

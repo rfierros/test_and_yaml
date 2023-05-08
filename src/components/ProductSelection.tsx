@@ -7,11 +7,12 @@ import productsList from '../data/products.json'
 import { productProps } from '../interfaces/interfaces'
 import { useCart } from '../hooks/useCart'
 import { formatCurrency } from '../utils/formatCurrency'
+import Warning from './Warning'
 
 
 
 export default function ProductSelection() {
-   const { addToCart } = useCart()
+   const { addToCart, MAX_NUM_PRODUCTS, cartItems } = useCart()
 
    const [amount, setAmount] = useState(0)
    const [selected, setSelected] = useState({
@@ -21,6 +22,8 @@ export default function ProductSelection() {
       taxRate: 0,
       price: 0
    })
+   const [errMinAmount, setErrMinAmount] = useState(false)
+   const [errMaxItems, setErrMaxItems] = useState(false)
 
    const handleAmount = (event: React.ChangeEvent<HTMLInputElement>) => {
       setAmount(parseInt(event.target.value, 10))
@@ -35,20 +38,31 @@ export default function ProductSelection() {
 
    const handleAddProduct = () => {
       if ( amount == 0){
-         alert('Amount must be greater than 0')
-      } else {
+         setErrMinAmount(true)
+      } else 
+         if (cartItems.length >= MAX_NUM_PRODUCTS) {
+            setErrMaxItems(true)
+      }
+      else {
          addToCart(selected,amount)
       }
    }
 
    return (
       <>
-
+      {errMinAmount && 
+      <Warning description={'Please choose an amount of items bigger than 0'}
+      show={errMinAmount}
+      onHide={() => setErrMinAmount(false)}/>}
+      {errMaxItems && 
+      <Warning description={'The maximum amount of different products is '+MAX_NUM_PRODUCTS}
+      show={errMaxItems}
+      onHide={() => setErrMaxItems(false)}/>}
       <Container className="border border-2 border-dark p-4 align-items-center justify-content-center">
          <h4>Product Selection</h4>
          <Row className="w-full align-items-center justify-content-between g-3">
          <Col>
-               <select name="products" id="products" onChange={handleSelected}>
+               <select name="products" id="products" onChange={handleSelected} defaultValue=''>
                   <option value="" disabled>Choose a product</option>
                   {productsList.map((item: productProps, i: number) => (
                      <option key={i} value={item.id}>{item.productName}</option>
@@ -78,9 +92,7 @@ export default function ProductSelection() {
             <Button onClick={handleAddProduct}>add to Cart</Button>
          </Col>
          </Row>
-
       </Container>
- 
       </>
    )
 }
