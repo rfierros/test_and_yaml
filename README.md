@@ -11,14 +11,6 @@ npm install # install all dependencies
 npm run dev # Run a development server (by default http://localhost:5173/)
 ```
 
-## How do I deploy it in a cloudprovider?
-
-You'll need `Node.js` installed at least at version 18.9. You'll also need access to a Terminal for following next steps:
-
-```
-step 1
-step 2
-```
 
 ## Changelog:
 
