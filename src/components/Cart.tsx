@@ -7,13 +7,34 @@ import Table from 'react-bootstrap/Table'
 import { useCart } from '../hooks/useCart'
 import { formatCurrency } from '../utils/formatCurrency'
 import ModalCheckout from './ModalCheckout'
+import Warning from './Warning'
 
 
 export default function Cart() {
    const { cartItems, MAX_NUM_PRODUCTS, clearCart, removeFromCart } = useCart()
    const [modalShow, setModalShow] = useState(false)
+   const [toast, setToast] = useState({ isOpen: false, title: '', message: '', type: '', delay: 3500 })
+
+   const handleBuyButton = () => {
+      if (cartItems.length <= 0) {
+         setToast({
+            isOpen: true,
+            title: 'Your Cart is empty.',
+            message: 'Please add some products.',
+            type: 'warning',
+            delay: 3500
+        })
+      }
+      else {
+         setModalShow(true)
+      }
+   }     
    return (
       <>
+      <Warning
+            body={toast}
+            onHide={() => setToast({...toast, isOpen:false})}
+      />      
       <Container className="border border-2 border-dark p-4">
          <h4>Cart</h4>
          <Container>
@@ -83,7 +104,7 @@ export default function Cart() {
 
 
             <Col>
-               <Button variant="success" onClick={() => setModalShow(true)}>Buy!</Button>
+               <Button variant="success" onClick={handleBuyButton}>Buy!</Button>
             </Col>
 
          

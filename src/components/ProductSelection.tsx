@@ -22,8 +22,7 @@ export default function ProductSelection() {
       taxRate: 0,
       price: 0
    })
-   const [errMinAmount, setErrMinAmount] = useState(false)
-   const [errMaxItems, setErrMaxItems] = useState(false)
+   const [toast, setToast] = useState({ isOpen: false, title: '', message: '', type: '', delay: 3500 })
 
    const handleAmount = (event: React.ChangeEvent<HTMLInputElement>) => {
       setAmount(parseInt(event.target.value, 10))
@@ -38,10 +37,22 @@ export default function ProductSelection() {
 
    const handleAddProduct = () => {
       if ( amount == 0){
-         setErrMinAmount(true)
+         setToast({
+            isOpen: true,
+            title: 'Incorrect amount.',
+            message: 'Please choose an amount of items bigger than 0.',
+            type: 'warning',
+            delay: 3500
+         })
       } else 
          if (cartItems.length >= MAX_NUM_PRODUCTS) {
-            setErrMaxItems(true)
+            setToast({
+               isOpen: true,
+               title: 'Too many products.',
+               message: 'The maximum amount of different products is ' + MAX_NUM_PRODUCTS + '.',
+               type: 'warning',
+               delay: 3500
+            })
       }
       else {
          addToCart(selected,amount)
@@ -50,14 +61,10 @@ export default function ProductSelection() {
 
    return (
       <>
-      {errMinAmount && 
-      <Warning description={'Please choose an amount of items bigger than 0'}
-      show={errMinAmount}
-      onHide={() => setErrMinAmount(false)}/>}
-      {errMaxItems && 
-      <Warning description={'The maximum amount of different products is '+MAX_NUM_PRODUCTS}
-      show={errMaxItems}
-      onHide={() => setErrMaxItems(false)}/>}
+      <Warning
+            body={toast}
+            onHide={() => setToast({...toast, isOpen:false})}
+      />
       <Container className="border border-2 border-dark p-4 align-items-center justify-content-center">
          <h4>Product Selection</h4>
          <Row className="w-full align-items-center justify-content-between g-3">
