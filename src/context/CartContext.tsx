@@ -23,7 +23,7 @@ type CartContext = {
 export const CartContext = createContext({} as CartContext)
 
 export function CartProvider ({children}: CartProviderProps) {
-   const MAX_NUM_PRODUCTS = 3
+   const MAX_NUM_PRODUCTS = 10
    const [cartItems, setCartItems] = useState<CartItem[]>([]) 
 
    function clearCart() {

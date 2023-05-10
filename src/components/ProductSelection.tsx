@@ -9,13 +9,11 @@ import { useCart } from '../hooks/useCart'
 import { formatCurrency } from '../utils/formatCurrency'
 import Warning from './Warning'
 
-
-
 export default function ProductSelection() {
    const { addToCart, MAX_NUM_PRODUCTS, cartItems } = useCart()
 
    const [amount, setAmount] = useState(0)
-   const [selected, setSelected] = useState({
+   const [selected, setSelected] = useState<productProps | undefined>({
       id: '',
       productName: '',
       maxAmount: 0,
@@ -55,7 +53,9 @@ export default function ProductSelection() {
             })
       }
       else {
-         addToCart(selected,amount)
+         if (selected !== undefined) {
+            addToCart(selected,amount)
+         }
       }
    }
 
@@ -80,7 +80,7 @@ export default function ProductSelection() {
          <Col>
             <div className="text-center">
                <div>Amount: <span>{amount}</span></div>
-               <input type="range" id="price" min="0" max={selected.maxAmount} value={amount}
+               <input type="range" id="price" min="0" max={typeof selected !== 'undefined' ? selected.maxAmount : 0} value={amount}
                      onChange={handleAmount}/>
             </div>            
          </Col>
@@ -89,9 +89,9 @@ export default function ProductSelection() {
          <div className="p-2">
             <span className="p-2">{amount}</span>
             <span className="p-2">X</span>
-            <span className="p-2">{formatCurrency(selected.price)}</span>
+            <span className="p-2">{typeof selected !== 'undefined' && formatCurrency(selected.price)}</span>
             <span className="p-2">=</span>
-            <span className="p-2">{formatCurrency(selected.price*amount)}</span>
+            <span className="p-2">{typeof selected !== 'undefined' && formatCurrency(selected.price*amount)}</span>
          </div>
          </Col>
 

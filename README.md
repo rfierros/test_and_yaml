@@ -1,3 +1,39 @@
+# My solution for Bike24's Frontend Challenge
+This repository is used as my approach for this challenge. My focus was to stick as much as possible to the functional part of the task leaving styling and other features as a secondary aspect.
+
+
+## How do I execute it locally?
+
+You'll need `Node.js` installed at least at version 18.9. You'll also need access to a Terminal for following next steps:
+
+```
+npm install # install all dependencies
+npm run dev # Run a development server (by default http://localhost:5173/)
+```
+
+## How do I deploy it in a cloudprovider?
+
+You'll need `Node.js` installed at least at version 18.9. You'll also need access to a Terminal for following next steps:
+
+```
+step 1
+step 2
+```
+
+## Changelog:
+
+- **v0.01**. Boiler plate. I've created the project with Vite. Cleaned all example code. Added Bootstrap for not wasting too much time styling in this task (it's not the purpose of this challenge). Created 2 Components (Cart & ProductSelection) non functional but good visually as a mockup.
+- **v0.02**. ProductSelection component. Gave a state and some logic between controls to make it a bit functional. 
+- **v0.03**. Added a Context for storing the cart.
+- **v0.04**. Cart component and Context. Added dynamic list and its functionality for Adding an item, Removing an item and Removing all items.
+- **v0.05**. Added a format currency funcionality.
+- **v0.06**. Included calculations for totals and small validations.
+- **v0.07**. Added Modal Checkout and Toast Errors.
+- **v0.08**. Toast messages Refactored.
+- **v0.09**. Fixed some undefined dataypes.
+
+
+# The Challenge:
 Greetings and welcome to the Bike24 Frontend challenge
 
 ![UI example](https://github.com/Bike24/FrontendCodingChallenge/blob/main/assets/ui_example.png?raw=true)
@@ -62,19 +98,3 @@ _Hint: You will find the products in the data folder_
 
 ### Good luck
 
-## Changelog:
-v0.01 Boiler plate. I've created the project with Vite. Cleaned all example code. 
-   Added Bootstrap for not wasting too much time styling in this task (it's not the purpose of this challenge).
-   Created 2 Components (Cart & ProductSelection) non functional but good visually as a mockup.
-
-v0.02 ProductSelection component. Gave a state and some logic between controls to make it a bit functional. 
-
-v0.03 Added a Context for storing the cart.
-
-v0.04 Cart component and Context. Added dynamic list and its functionality for Adding an item, Removing an item and Removing all items.
-
-v0.05 Added a format currency funcionality.
-
-v0.06 Included calculations for totals and small validations.
-
-v0.07 Added Modal Checkout and Modal Errors.
