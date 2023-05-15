@@ -79,8 +79,8 @@ export default function ProductSelection() {
 
          <Col>
             <div className="text-center">
-               <div>Amount: <span>{amount}</span></div>
-               <input type="range" id="price" min="0" max={typeof selected !== 'undefined' ? selected.maxAmount : 0} value={amount}
+               <div>Amount: <span data-testid='amount'>{amount}</span></div>
+               <input type="range" id="amount" data-testid='amountrange' min="0" max={typeof selected !== 'undefined' ? selected.maxAmount : 0} value={amount}
                      onChange={handleAmount}/>
             </div>            
          </Col>
